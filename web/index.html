@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Core War — Rust/WASM ICWS-94 MARS Arena</title>
+  <meta name="description" content="Interactive ICWS-94 Core War MARS virtual machine and Redcode battle arena powered by Rust and WebAssembly." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/tokens.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/components.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-mark">CW</span>
+      <div>
+        <h1>CORE WAR <span class="badge">ICWS-94 • WASM</span></h1>
+        <p class="subtitle">Memory Array Redcode Simulator (8,000-cell circular core)</p>
+      </div>
+    </div>
+    <div class="topbar-actions">
+      <button id="btn-ref" class="btn btn-ghost" type="button">Redcode Reference</button>
+    </div>
+  </header>
+
+  <main class="workspace">
+    <section class="arena-panel">
+      <div class="toolbar">
+        <div class="transport">
+          <button id="btn-play" class="btn btn-primary" type="button">Play</button>
+          <button id="btn-step1" class="btn" type="button">Step 1</button>
+          <button id="btn-step100" class="btn" type="button">Step 100</button>
+          <button id="btn-reset" class="btn" type="button">Reset</button>
+          <button id="btn-match" class="btn btn-accent" type="button">Run 20 Rounds</button>
+        </div>
+        <label class="speed-ctrl">
+          <span>Speed: <strong id="speed-val">40</strong> cyc/f</span>
+          <input id="speed-slider" type="range" min="1" max="500" value="40" />
+        </label>
+      </div>
+
+      <div class="canvas-wrap">
+        <canvas id="core-canvas" width="900" height="720"></canvas>
+      </div>
+
+      <div class="status-strip">
+        <div id="cycle-readout" class="mono">Cycle: 0 / 80,000</div>
+        <div id="round-banner" class="round-banner">Ready</div>
+        <div id="cell-inspector" class="mono inspector">Hover core to inspect cell</div>
+      </div>
+    </section>
+
+    <aside class="side-panel">
+      <section class="card">
+        <div class="card-header">
+          <h2>Warriors</h2>
+          <div id="warrior-tabs" class="tabs"></div>
+        </div>
+        <div class="editor-meta">
+          <select id="preset-select" aria-label="Load preset warrior"></select>
+          <label class="toggle-slot">
+            <input id="slot-enabled" type="checkbox" checked />
+            <span>Active</span>
+          </label>
+        </div>
+        <textarea id="code-editor" spellcheck="false" aria-label="Redcode editor"></textarea>
+        <div id="asm-status" class="asm-status ok">Assembled OK</div>
+      </section>
+
+      <section class="card">
+        <div class="card-header">
+          <h2>Live Telemetry &amp; Scoreboard</h2>
+          <button id="btn-clear-scores" class="btn btn-xs btn-ghost" type="button">Clear</button>
+        </div>
+        <div id="warrior-stats" class="stats-list"></div>
+      </section>
+    </aside>
+  </main>
+
+  <dialog id="ref-modal" class="modal">
+    <div class="modal-head">
+      <h2>ICWS-94 Redcode Quick Reference</h2>
+      <button id="btn-close-ref" class="btn btn-xs" type="button">Close</button>
+    </div>
+    <div id="ref-body" class="modal-body"></div>
+  </dialog>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
